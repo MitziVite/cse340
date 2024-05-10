@@ -67,12 +67,11 @@ nav ul {
   height: 50px;
 }
 
-nav ul li {
+nav ul li { 
   flex: 1;
   text-align: center;
   color: white;
   font-family: 'Noto Sans';
-  font-size: bold;
 }
 
 
