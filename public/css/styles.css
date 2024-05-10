@@ -1,6 +1,191 @@
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400..900&family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap');
 /******* Change Box Model ***************/
 *,
 *:before,
 *:after {
   box-sizing: border-box;
+}
+body{
+  font-family: 'Noto Sans';
+  background-image: url('../images/site/small_check.jpg');
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+}
+#overlayContainer {
+  position: relative; 
+  background-color: rgb(255, 255, 255);
+  min-height: 100vh;
+  width: 100%;
+  /* padding: 20px; */
+}
+
+
+header#top-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  
+}
+
+.siteName{
+  padding: 1.2% 0;
+  font-family: 'Cinzel';
+  
+}
+
+.siteName a{
+  font-size: 2em;
+  text-decoration: none;
+  color: black;
+  background-color: transparent;
+}
+
+#tools {
+  order: 2;
+  padding-right: 30px;
+  font-family: 'Cinzel';
+}
+
+#tools a{
+  text-decoration: none;
+  color: black;
+
+}
+
+nav {
+  width: 100%;
+  background-color: black;
+}
+
+nav ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  height: 50px;
+}
+
+nav ul li {
+  flex: 1;
+  text-align: center;
+  color: white;
+  font-family: 'Noto Sans';
+  font-size: bold;
+}
+
+
+#imageContainer {
+  position: relative;
+  width: 100%;
+}
+
+#homeImage {
+  width: 100%;   
+  height: auto;
+  display: block;
+}
+
+#homeImageText {
+  position: absolute; 
+  top: 50%;
+  left: 15%;
+  transform: translate(-20%, -50%);
+  color: white;
+  background-color: rgba(0, 0, 0, 0.5);
+  padding: 5px;
+  height: 90%;
+  max-height:220px ;
+  font-size: 80%;
+}
+
+#homeImageButton {
+  width: 150px;  
+  height: 50px;
+  padding: 0; 
+  border: none;
+  background-color: transparent;
+  overflow: hidden;
+}
+
+#homeImageButton img {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+#upgradesTable {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  gap: 20px;
+}
+
+#upgradesTable div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: #f1f1f1;
+  text-align: center;
+  /* padding: 20px; */
+  gap: 10px;
+}
+
+#upgradesTable img {
+  width: 40%; 
+  max-width: 150px;
+  margin: auto;
+}
+h1, h2, h3{
+  font-family: 'Cinzel';
+}
+
+ul, p, a{
+  font-size: smaller;
+}
+
+
+@media (min-width: 992px) {
+  #overlayContainer, header, nav, main, footer, #homeContainer {
+    margin-left: auto;
+    margin-right: auto;
+    /* max-width: calc(100% - 100%); */
+  }
+
+  #overlayContainer{
+    border-radius: 2%;
+
+  }
+
+  #homeImageText {
+    position: absolute; 
+    top: 10%;
+    left: 10%;
+    transform: translate(-10%, -20%);
+    color: white;
+    background-color: rgba(0, 0, 0, 0.5);
+    padding: 0 10px;
+    font-size: 100%;
+  }
+}
+
+#overlayContainer, header, nav, main, footer, #homeContainer {
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 90%;
+  box-sizing
+  : border-box;
+}
+
+
+
+@media (max-width: 991px) {
+  #overlayContainer, header, nav, main, footer {
+    margin-left: 0px;
+    margin-right: 0px;
+    max-width: none;
+
+  }
 }
