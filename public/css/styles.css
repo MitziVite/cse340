@@ -135,7 +135,7 @@ nav ul li {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background: #f1f1f1;
+  background: #457fb358;
   text-align: center;
   /* padding: 20px; */
   gap: 10px;
@@ -203,11 +203,6 @@ ul, p, a{
     padding: 20px;
 }
 }
-
-
-
-
-
 
 @media (max-width: 991px) {
   #overlayContainer, header, nav, main, footer {
