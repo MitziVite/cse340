@@ -20,10 +20,10 @@ WHERE inv_make = 'GM' AND inv_description LIKE '%small interiors%';
 
 --Use an inner join to select the make and model fields from the inventory table and the 
 --classification name field from the classification table for inventory items that belong to the "Sport" category
-SELECT inventory.inv_make, inventory.inv_model, classification.calssification_name
+SELECT inventory.inv_make, inventory.inv_model, classification.classification_name
 FROM inventory
 INNER JOIN classification ON inventory.classification_id = classification.classification_id
-WHERE classification.calssification_name = 'Sport';
+WHERE classification.classification_name = 'Sport';
 
 
 --Update all records in the inventory table to add "/vehicles" 
