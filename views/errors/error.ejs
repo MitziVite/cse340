@@ -1,0 +1,13 @@
+<!-- Content Heading -->
+<% if (title) { %>
+    <h1><%= title %></h1>
+<% } else { %>
+    <script>window.location.href = '/';</script>
+<% } %>
+
+<!-- Error Message -->
+<% if (message) { %>
+    <p><%- message %></p>
+<% } else { %>
+    <p>Oops! Something went wrong, but we don't know what it is. Let's hope the universe aligns itself soon!</p>
+<% } %>
