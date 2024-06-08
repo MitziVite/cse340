@@ -17,6 +17,7 @@ const utilities = require("./utilities");
 
 
 app.use(static)
+
 //Index route
 app.get("/", utilities.handleErrors(baseController.buildHome))
 app.use("/inv", inventoryRoute)
