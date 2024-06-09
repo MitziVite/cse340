@@ -69,3 +69,27 @@ Util.buildClassificationGrid = async function(data){
     }
     return grid
   }
+
+
+
+  Util.buildVehicleGrid = async function(data){
+    let grid;
+    if(data.length > 0){
+      grid = '<div class="vehicleInfo">';
+      data.forEach(vehicle => {
+        grid += '<img src="' + vehicle.inv_image + '" alt="Image of '
+        + vehicle.inv_make + ' ' + vehicle.inv_model+'">';
+        grid += '<h2>' + vehicle.inv_make + ' ' + vehicle.inv_model + " Details" +'</h2>';
+        grid += '<div class="detailsInfo">';
+        grid += '<p class="back"><strong>Price: ' +'$ '+ new Intl.NumberFormat('en-US').format(vehicle.inv_price) +'</strong></p>';
+        grid += '<p><strong>Description:</strong> ' + vehicle.inv_description +'</p>';
+        grid += '<p class="back"><strong>Color:</strong> ' + vehicle.inv_color +'</p>';
+        grid += '<p><strong>Mileage:</strong> ' + vehicle.inv_miles +'</p>';
+        grid += '</div>';
+      });
+    } else { 
+      grid = '<p class="notice">Sorry, no matching vehicles could be found.</p>';
+    }
+    return grid;
+  }
+  

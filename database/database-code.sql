@@ -58,3 +58,4 @@ VALUES ('Custom'),
 ('SUV'),
 ('Truck'),
 ('Sedan');
+
