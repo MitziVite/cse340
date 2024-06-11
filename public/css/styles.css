@@ -5,6 +5,7 @@
 *:after {
   box-sizing: border-box;
 }
+
 body{
   font-family: 'Noto Sans';
   background-image: url('../images/site/small_check.jpg');
@@ -12,6 +13,8 @@ body{
   background-position: center;
   background-attachment: fixed;
 }
+
+
 #overlayContainer {
   position: relative; 
   background-color: rgb(255, 255, 255);
@@ -37,12 +40,34 @@ header#top-header {
   
 }
 
+nav {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+nav li {
+  display: inline;
+}
+
+nav li a {
+  display: inline-block;
+  padding: 10px 20px;
+  text-decoration: none;
+  color: white;
+  border-radius: 10%;
+}
+
+nav li a:hover {
+  background-color: white; /* Fondo blanco al pasar el mouse */
+  color: black; /* Texto negro al pasar el mouse */
+}
+
 .siteName{
   padding: 1.2% 0;
   font-family: 'Cinzel';
   
 }
-
 .siteName a{
   font-size: 2em;
   text-decoration: none;
@@ -61,12 +86,10 @@ header#top-header {
   color: black;
 
 }
-
 nav {
   width: 100%;
   background-color: black;
 }
-
 nav ul {
   list-style: none;
   margin: 0;
@@ -82,6 +105,13 @@ nav ul li {
   color: white;
   font-family: 'Noto Sans';
 }
+
+
+
+
+
+
+
 
 
 #imageContainer {
@@ -155,11 +185,103 @@ ul, p, a{
 }
 
 
+
+
+
+/* Grid styles */
+.grid-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 20px;
+  padding: 20px;
+}
+
+.grid-item {
+  background-color: #f0f0f0;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  list-style-type: none;
+}
+
+.grid-item:hover {
+  background-color: #e0e0e0;
+  transform: translateY(-2px);
+}
+
+.grid-image {
+  max-width: 100%;
+  border-radius: 5px;
+}
+
+.namePrice {
+  margin-top: 10px;
+}
+
+.grid-title {
+  font-size: 1.2em;
+  margin: 10px 0;
+}
+
+.grid-link {
+  text-decoration: none;
+  color: black;
+}
+
+.grid-price {
+  font-size: 1.2em;
+  color: green;
+}
+
+/* Vehicle info styles */
+.vehicle-info {
+  display: flex;
+  flex-wrap: wrap; /* Permite que los elementos se envuelvan en pantallas pequeñas */
+}
+
+.vehicle-image {
+  flex: 1; /* La imagen ocupa todo el ancho en pantallas pequeñas */
+  max-width: 100%; /* La imagen no superará el ancho del contenedor */
+  height: auto; /* La altura se ajusta automáticamente para mantener la relación de aspecto */
+  margin-right: 20px; /* Espacio entre la imagen y el texto en pantallas grandes */
+  margin-bottom: 20px; /* Espacio debajo de la imagen en pantallas pequeñas */
+}
+
+  .vehicle-item {
+    display: flex;
+    flex-direction: column; 
+    margin-bottom: 20px;
+  }
+
+.vehicle-title {
+  flex: 0; /* El texto ocupa todo el ancho en pantallas pequeñas */
+  margin-top: 0; /* Elimina el margen superior para que el título se alinee con la imagen */
+}
+
+.details-info {
+  flex: 1; /* La información ocupa todo el ancho en pantallas pequeñas */
+}
+
+
+.vehicle-price {
+  font-size: 1.5em;
+  color: green;
+}
+
+
+
+
+
+
+
+
+
+
 @media (min-width: 992px) {
   #overlayContainer, header, nav, main, footer, #homeContainer {
     margin-left: auto;
     margin-right: auto;
-    /* max-width: calc(100% - 100%); */
   }
 
   #overlayContainer{
@@ -186,22 +308,24 @@ ul, p, a{
   }
   #contentContainer {
     display: flex;
-    justify-content: space-between; /* Asegura que haya espacio entre los componentes */
-    align-items: flex-start; /* Alinea los elementos en la parte superior */
+    justify-content: space-between; 
+    align-items: flex-start; 
 }
 
 .reviews {
-    order: 2; /* Este será visualmente el segundo elemento */
-    flex: 2; /* Toma dos fracciones del espacio disponible */
+    order: 2; 
+    flex: 2; 
     padding: 20px;
     line-height: 3.5vw;
 }
 
 .upgrades-section {
-    order: 1; /* Este será visualmente el primer elemento, a la izquierda */
-    flex: 2; /* Toma dos fracciones del espacio disponible */
+    order: 1; 
+    flex: 2; 
     padding: 20px;
 }
+  
+
 }
 
 @media (max-width: 991px) {
@@ -209,6 +333,13 @@ ul, p, a{
     margin-left: 0px;
     margin-right: 0px;
     max-width: none;
+  }
+  .vehicle-info {
+    flex-direction: column; /* El contenido se apila verticalmente en pantallas pequeñas */
+  }
 
+  .vehicle-image {
+    margin-right: 0; /* Elimina el margen derecho en pantallas pequeñas */
+    margin-bottom: 10px; /* Reduce el espacio debajo de la imagen en pantallas pequeñas */
   }
 }
