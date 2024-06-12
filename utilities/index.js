@@ -72,7 +72,6 @@ Util.buildClassificationGrid = async function(data){
 
 
 
-
 Util.buildVehicleGrid = async function(data){
   let grid;
   if(data.length > 0){
@@ -82,10 +81,18 @@ Util.buildVehicleGrid = async function(data){
       + vehicle.inv_make + ' ' + vehicle.inv_model+'" class="vehicle-image">';
       grid += '<h2 class="vehicle-title">' + vehicle.inv_make + ' ' + vehicle.inv_model + " Details" +'</h2>';
       grid += '<div class="details-info">';
-      grid += '<p class="vehicle-price"><strong>Price: ' +'$ '+ new Intl.NumberFormat('en-US').format(vehicle.inv_price) +'</strong></p>';
-      grid += '<p><strong>Description:</strong> ' + vehicle.inv_description +'</p>';
-      grid += '<p><strong>Color:</strong> ' + vehicle.inv_color +'</p>';
-      grid += '<p><strong>Mileage:</strong> ' + vehicle.inv_miles +'</p>';
+      grid += '<p class="vehicle-price"><strong>Price: $' + new Intl.NumberFormat('en-US').format(vehicle.inv_price) + '</strong></p>';
+      grid += '<p><strong>Description:</strong> ' + vehicle.inv_description + '</p>';
+      grid += '<p><strong>Color:</strong> ' + vehicle.inv_color + '</p>';
+      
+      // Verificar que el kilometraje es un número antes de formatearlo
+      let mileage = parseInt(vehicle.inv_miles, 10);
+      if (!isNaN(mileage)) {
+        grid += '<p><strong>Mileage:</strong> ' + new Intl.NumberFormat('en-US').format(mileage) + '</p>';
+      } else {
+        grid += '<p><strong>Mileage:</strong> ' + vehicle.inv_miles + '</p>';
+      }
+      
       grid += '</div>';
     });
     grid += '</div>';
