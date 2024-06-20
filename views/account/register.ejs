@@ -1,0 +1,48 @@
+<h1><%= title %></h1>
+<!-- Flash message -->
+<% if (messages.notice) { %>
+    <div class="flash-message">
+      <%= messages.notice %>
+    </div>
+  <% } %>
+  <!-- Registration Form -->
+  <form id="registerForm" action="/account/register" method="post">
+    <div class="form-group">
+      <label for="firstName">First Name:</label>
+      <input type="text" id="firstName" name="firstName" required>
+    </div>
+    <div class="form-group">
+      <label for="lastName">Last Name:</label>
+      <input type="text" id="lastName" name="lastName" required>
+    </div>
+    <div class="form-group">
+      <label for="email">Email Address:</label>
+      <input type="email" id="email" name="email" required>
+    </div>
+    <div class="form-group">
+      <label for="password">Password:</label>
+      <input type="password" id="password" name="pword" id="pword">
+      <span id="pswdBtn">Show Password</span>
+    </div>
+    <div class="form-group">
+      <button type="submit">Register</button>
+    </div>
+  </form>
+
+  <!-- Tu contenido HTML -->
+
+<script>
+  const pswdBtn = document.querySelector("#pswdBtn");
+  pswdBtn.addEventListener("click", function(){
+    const pswdInput = document.getElementById("password");
+    const type = pswdInput.getAttribute("type");
+    if (type === "password"){
+      pswdInput.setAttribute("type", "text");
+      pswdBtn.innerHTML = "Hide Password";
+    } else {
+      pswdInput.setAttribute("type", "password");
+      pswdBtn.innerHTML = "Show Password";
+    }
+  });
+</script>
+</body>
