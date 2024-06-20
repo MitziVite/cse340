@@ -20,21 +20,18 @@ async function buildLogin(req, res, next) {
 /* ****************************************
 Deliver registration view
 *************************************** */
+/* ****************************************
+*  Deliver registration view
+* *************************************** */
 async function buildRegister(req, res, next) {
-    try {
-        console.log("buildRegister function called"); // Log para depuración
-        let nav = await utilities.getNav();
-        res.render("account/register", {
-            title: "Register",
-            nav,
-            messages: req.flash()
-        });
-    } catch (error) {
-        console.error("Error in buildRegister:", error); // Log el error
-        next(error); // Pasar el error al manejador de errores
-    }
-}
-
+    let nav = await utilities.getNav()
+    res.render("account/register", {
+      title: "Register",
+      nav,
+      errors: null,
+    })
+  }
+  
 
 /* ****************************************
 *  Process Registration
