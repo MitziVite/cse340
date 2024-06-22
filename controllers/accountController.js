@@ -1,10 +1,11 @@
+const bcrypt = require("bcryptjs")
 const utilities = require("../utilities");
 const accountController = require("../controllers/accountController");
 
-// const accountModel = require("../models/account-model");
+const accountModel = require("../models/account-models");
 async function buildLogin(req, res, next) {
     try {
-        console.log("buildLogin function called"); // Log para depuración
+        console.log("buildLogin function called");
         let nav = await utilities.getNav();
         res.render("account/login", {
             title: "Login",
@@ -12,8 +13,8 @@ async function buildLogin(req, res, next) {
             messages: req.flash()
         });
     } catch (error) {
-        console.error("Error in buildLogin:", error); // Log el error
-        next(error); // Pasar el error al manejador de errores
+        console.error("Error in buildLogin:", error); 
+        next(error);
     }
 }
 
@@ -39,13 +40,32 @@ async function buildRegister(req, res, next) {
 async function registerAccount(req, res) {
     let nav = await utilities.getNav()
     const { account_firstname, account_lastname, account_email, account_password } = req.body
-  
-    const regResult = await accountModel.registerAccount(
+
+    // Hash the password before storing
+  let hashedPassword
+  try {
+    // regular password and cost (salt is generated automatically)
+    hashedPassword = await bcrypt.hashSync(account_password, 10)
+  } catch (error) {
+    req.flash("notice", 'Sorry, there was an error processing the registration.')
+    res.status(500).render("account/register", {
+      title: "Registration",
+      nav,
+      errors: null,
+    })
+  }
+
+      const regResult = await accountModel.registerAccount(
       account_firstname,
       account_lastname,
       account_email,
-      account_password
-    )
+      account_password,
+      hashedPassword
+  )
+
+
+
+
   
     if (regResult) {
       req.flash(
@@ -65,4 +85,4 @@ async function registerAccount(req, res) {
     }
   }
 
-module.exports = { buildLogin, buildRegister };
+module.exports = { buildLogin, buildRegister, registerAccount };

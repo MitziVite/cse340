@@ -50,6 +50,7 @@ app.use(static);
 
 // Account Routes
 app.use('/account', accountRoute);
+app.use("/account", require("./routes/accountRoute"))
 
 // Index Route
 app.get('/', utilities.handleErrors(baseController.buildHome));

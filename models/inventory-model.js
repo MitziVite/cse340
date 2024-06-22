@@ -7,8 +7,6 @@ async function getClassifications(){
   return await pool.query("SELECT * FROM public.classification ORDER BY classification_name")
 }
 
-module.exports = {getClassifications, getInventoryByClassificationId, getVehicleByDataId}
-
 
 
 
@@ -42,3 +40,4 @@ async function getInventoryByClassificationId(classification_id) {
       console.error("getclassificationsbyid error " + error)
     }
   }
+  module.exports = {getClassifications, getInventoryByClassificationId, getVehicleByDataId};
