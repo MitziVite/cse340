@@ -1,0 +1,58 @@
+<%- include('partials/header', { title: title }) %>
+
+<h1><%= title %></h1>
+
+<% if (messages.notice) { %>
+  <p class="notice"><%= messages.notice %></p>
+<% } %>
+
+<form action="/inv/add-inventory" method="post" onsubmit="return validateForm()">
+  <div>
+    <label for="classification_id">Classification:</label>
+    <%- classificationList %>
+  </div>
+  <div>
+    <label for="inv_make">Make:</label>
+    <input type="text" name="inv_make" id="inv_make" required value="<%= typeof inv_make !== 'undefined' ? inv_make : '' %>">
+  </div>
+  <div>
+    <label for="inv_model">Model:</label>
+    <input type="text" name="inv_model" id="inv_model" required value="<%= typeof inv_model !== 'undefined' ? inv_model : '' %>">
+  </div>
+  <div>
+    <label for="inv_description">Description:</label>
+    <textarea name="inv_description" id="inv_description" required><%= typeof inv_description !== 'undefined' ? inv_description : '' %></textarea>
+  </div>
+  <div>
+    <label for="inv_image">Image Path:</label>
+    <input type="text" name="inv_image" id="inv_image" required value="<%= typeof inv_image !== 'undefined' ? inv_image : '/images/no-image.png' %>">
+  </div>
+  <div>
+    <label for="inv_thumbnail">Thumbnail Path:</label>
+    <input type="text" name="inv_thumbnail" id="inv_thumbnail" required value="<%= typeof inv_thumbnail !== 'undefined' ? inv_thumbnail : '/images/no-image.png' %>">
+  </div>
+  <div>
+    <label for="inv_price">Price:</label>
+    <input type="number" name="inv_price" id="inv_price" required step="0.01" value="<%= typeof inv_price !== 'undefined' ? inv_price : '' %>">
+  </div>
+  <div>
+    <label for="inv_year">Year:</label>
+    <input type="number" name="inv_year" id="inv_year" required value="<%= typeof inv_year !== 'undefined' ? inv_year : '' %>">
+  </div>
+  <div>
+    <label for="inv_miles">Miles:</label>
+    <input type="number" name="inv_miles" id="inv_miles" required value="<%= typeof inv_miles !== 'undefined' ? inv_miles : '' %>">
+  </div>
+  <div>
+    <button type="submit">Add Vehicle</button>
+  </div>
+</form>
+
+<script>
+  function validateForm() {
+    // Add client-side validation logic here
+    return true;
+  }
+</script>
+
+<%- include('partials/footer') %>
