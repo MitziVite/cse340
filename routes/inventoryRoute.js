@@ -8,7 +8,7 @@ router.get('/', utilities.handleErrors(invController.buildManagement));
 router.get('/add-classification', utilities.handleErrors(invController.buildAddClassification));
 router.post('/add-classification', utilities.handleErrors(invController.addClassification));
 router.get('/add-inventory', utilities.handleErrors(invController.buildAddInventory));
-router.post('/add-inventory', utilities.handleErrors(invController.addInventory));
+router.post('/add-inventory', utilities.handleErrors(invController.processNewInventory));
 
 // Routes to build inventory views
 router.get("/type/:classificationId", utilities.handleErrors(invController.buildByClassificationId));

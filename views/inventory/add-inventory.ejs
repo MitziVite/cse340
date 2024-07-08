@@ -1,6 +1,6 @@
-<%- include('partials/header', { title: title }) %>
 
-<h1><%= title %></h1>
+
+<!-- <h1><%#= title %></h1> -->
 
 <% if (messages.notice) { %>
   <p class="notice"><%= messages.notice %></p>
@@ -43,16 +43,10 @@
     <label for="inv_miles">Miles:</label>
     <input type="number" name="inv_miles" id="inv_miles" required value="<%= typeof inv_miles !== 'undefined' ? inv_miles : '' %>">
   </div>
+
+  <label for="inv_color">Color:</label>
+  <input type="text" id="inv_color" name="inv_color" required>
   <div>
     <button type="submit">Add Vehicle</button>
   </div>
 </form>
-
-<script>
-  function validateForm() {
-    // Add client-side validation logic here
-    return true;
-  }
-</script>
-
-<%- include('partials/footer') %>

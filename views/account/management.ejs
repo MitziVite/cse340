@@ -1,0 +1,12 @@
+
+<% if (messages.notice) { %>
+    <div class="flash-message">
+        <%= messages.notice %>
+    </div>
+<% } %>
+    <% if (errors) { %>
+        <div class="error-message">
+            <%= errors %>
+        </div>
+     <% } %>
+<h1>You're logged in</h1>

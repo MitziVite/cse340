@@ -98,43 +98,68 @@ invCont.addClassification = async function (req, res, next) {
   }
 };
 
-// Add inventory
-invCont.addInventory = async function (req, res, next) {
-  try {
-    const {
-      classification_id,
-      inv_make,
-      inv_model,
-      inv_description,
-      inv_image,
-      inv_thumbnail,
-      inv_price,
-      inv_year,
-      inv_miles
-    } = req.body;
+  // Process Add Inventory
 
-    const result = await invModel.addInventory({
-      classification_id,
-      inv_make,
-      inv_model,
-      inv_description,
-      inv_image,
-      inv_thumbnail,
-      inv_price,
-      inv_year,
-      inv_miles
-    });
-
-    if (result) {
-      req.flash("notice", "New vehicle added successfully.");
-      res.redirect("/inv");
-    } else {
-      req.flash("notice", "Failed to add vehicle.");
+  invCont.processNewInventory = async function (req, res, next) {
+    try {
+      let nav = await utilities.getNav();
+      const {
+        classification_id,
+        inv_make,
+        inv_model,
+        inv_year,
+        inv_description,
+        inv_image,
+        inv_thumbnail,
+        inv_price,
+        inv_miles,
+        inv_color
+      } = req.body;
+  
+      const addResult = await invModel.addInventory(
+        classification_id,
+        inv_make,
+        inv_model,
+        inv_year,
+        inv_description,
+        inv_image,
+        inv_thumbnail,
+        inv_price,
+        inv_miles,
+        inv_color
+      );
+  
+      const classificationNav = await utilities.buildClassificationList();
+  
+      if (addResult) {
+        req.flash(
+          "notice",
+          `Congratulations, you added the ${inv_make} ${inv_model}.`
+        );
+        res.status(201).render("./inventory/management", {
+          title: "Vehicle Management",
+          nav,
+          classificationNav,
+          messages: req.flash("notice"),
+          errors: null,
+        });
+      } else {
+        req.flash("notice", "Sorry, the new vehicle could not be added.");
+        res.status(501).render("inventory/add-inventory", {
+          title: "Add New Vehicle",
+          nav,
+          classificationNav,
+          errors: null,
+        });
+      }
+    } catch (error) {
+      console.error("Error processing new inventory:", error);
+      req.flash("notice", "Error adding vehicle: " + error.message);
       res.redirect("/inv/add-inventory");
     }
-  } catch (error) {
-    next(error);
-  }
+
 };
+
+
 
 module.exports = invCont;

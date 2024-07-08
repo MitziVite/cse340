@@ -2,26 +2,27 @@ const express = require("express");
 const router = new express.Router();
 const utilities = require("../utilities");
 const accountController = require("../controllers/accountController");
-const regValidate = require('../utilities/account-validation')
+const regValidate = require('../utilities/account-validation');
 
-// Rutas para la visualización de las páginas de login y registro
+// Routes for login and registration page views
 router.get('/login', utilities.handleErrors(accountController.buildLogin));
 router.get('/register', utilities.handleErrors(accountController.buildRegister));
+router.get('/', utilities.checkLogin, utilities.handleErrors(accountController.buildAccountManagement));
 
-// Process the registration data
+// Process registration data
 router.post(
     "/register",
-    regValidate.registationRules(),
+    regValidate.registrationRules(),
     regValidate.checkRegData,
     utilities.handleErrors(accountController.registerAccount)
-  )
+);
 
-// Process the login attempt
+// Process login request
 router.post(
     "/login",
-    (req, res) => {
-      res.status(200).send('login process')
-    }
-)
-  
+    regValidate.loginRules(),
+    regValidate.checkLoginData,
+    utilities.handleErrors(accountController.accountLogin)
+);
+
 module.exports = router;

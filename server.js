@@ -1,5 +1,3 @@
-const session = require("express-session");
-const pool = require('./database/');
 const express = require("express");
 const expressLayouts = require("express-ejs-layouts");
 const path = require('path');
@@ -10,9 +8,11 @@ const inventoryRoute = require("./routes/inventoryRoute");
 const baseController = require("./controllers/baseController");
 const utilities = require("./utilities");
 const errorHandler = require("./views/errors/errorHandler");
-const accountController = require("./controllers/accountController");
-const accountRoute = require("./routes/accountRoute");
-const bodyParser = require("body-parser")
+const flash = require("connect-flash");
+const session = require("express-session");
+const bodyParser = require("body-parser");
+const pool = require('./database/');
+const cookieParser = require("cookie-parser");
 
 // Middleware and Configurations
 app.use(express.static('public'));
@@ -20,8 +20,6 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 app.use(expressLayouts);
 app.set('layout', './layouts/layout');
-
-
 
 // Session Middleware
 app.use(session({
@@ -36,21 +34,24 @@ app.use(session({
 }));
 
 // Express Messages Middleware
-app.use(require('connect-flash')());
+app.use(flash());
 app.use((req, res, next) => {
     res.locals.messages = require('express-messages')(req, res);
     next();
 });
 
-app.use(bodyParser.json())
-app.use(bodyParser.urlencoded({ extended: true })) // for parsing application/x-www-form-urlencoded
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(cookieParser());
+
+// Apply JWT check middleware
+app.use(utilities.checkJWTToken);
 
 // Static Routes
 app.use(static);
 
 // Account Routes
-app.use('/account', accountRoute);
-app.use("/account", require("./routes/accountRoute"))
+app.use('/account', require("./routes/accountRoute"));
 
 // Index Route
 app.get('/', utilities.handleErrors(baseController.buildHome));
@@ -82,8 +83,6 @@ app.use(async (err, req, res, next) => {
         nav
     });
 });
-
-// Custom Error Handler
 app.use(errorHandler);
 
 // Local Server Information
