@@ -9,6 +9,9 @@ router.get('/add-classification', utilities.handleErrors(invController.buildAddC
 router.post('/add-classification', utilities.handleErrors(invController.addClassification));
 router.get('/add-inventory', utilities.handleErrors(invController.buildAddInventory));
 router.post('/add-inventory', utilities.handleErrors(invController.processNewInventory));
+router.get("/type/:classificationId", invController.buildByClassificationId);
+router.get("/getInventory/:classification_id", utilities.handleErrors(invController.getInventoryJSON))
+
 
 // Routes to build inventory views
 router.get("/type/:classificationId", utilities.handleErrors(invController.buildByClassificationId));

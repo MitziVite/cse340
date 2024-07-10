@@ -34,24 +34,7 @@ async function buildRegister(req, res, next) {
     });
 }
 
-/* ******************************
- *  Deliver account management view
- * ***************************** */
-async function buildAccountManagement(req, res, next) {
-    try {
-        console.log("buildAccountManagement function called");
-        let nav = await utilities.getNav();
-        res.render("account/management", {
-            title: "Account Management",
-            nav,
-            messages: req.flash(),
-            errors: null
-        });
-    } catch (error) {
-        console.error("Error in buildAccountManagement:", error);
-        next(error);
-    }
-}
+
 
 /* ******************************
  *  Process registration
@@ -141,5 +124,25 @@ async function accountLogin(req, res) {
         next(error);
     }
 }
+
+/* ******************************
+ *  Deliver account management view
+ * ***************************** */
+async function buildAccountManagement(req, res, next) {
+    try {
+        console.log("buildAccountManagement function called");
+        let nav = await utilities.getNav();
+        res.render("account/management", {
+            title: "Account Management",
+            nav,
+            messages: req.flash(),
+            errors: null
+        });
+    } catch (error) {
+        console.error("Error in buildAccountManagement:", error);
+        next(error);
+    }
+}
+
 
 module.exports = { buildLogin, buildRegister, registerAccount, accountLogin, buildAccountManagement };
