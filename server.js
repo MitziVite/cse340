@@ -26,7 +26,7 @@ const cookieParser = require("cookie-parser");
 
 /* ***********************
  * Middleware
- * ************************/
+* ************************/
 app.use(session({
     store: new (require('connect-pg-simple')(session))({
         createTableIfMissing: true,

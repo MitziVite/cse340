@@ -1,0 +1,24 @@
+
+<% if (messages.notice) { %>
+    <p class="notice"><%= messages.notice %></p>
+  <% } %>
+  
+<p>Confirm Deleition - The deleition is permanent</p>
+<form id="deleteInventory" action="/inv/delete" method="post">
+    <label for="inv_make">Make</label>
+    <input type="text" id="inv_make" name="inv_make" required readonly value="<%=inv_make%>">
+
+    <label for="inv_model"> Model </label>
+    <input type="text" id="inv_model" name="inv_model" required readonly value="<%= inv_model%>" >
+
+    <label for="inv_price">Price</label>
+    <input type="number" id="inv_price" name="inv_price" required readonly value="<%= locals.inv_price%>" >
+
+    <label for="inv_year">Year</label>
+    <input type="number" id="inv_year" name="inv_year" required readonly value="<%= locals.inv_year%>" >
+
+    <input type="submit" id="btn-addinvenotry">
+    <input type="hidden" name="inv_id"
+        <% if(locals.inv_id) { %> value="<%= locals.inv_id %>"
+        <% } %>>
+</form>
