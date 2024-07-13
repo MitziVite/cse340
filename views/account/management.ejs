@@ -1,12 +1,19 @@
-
-<% if (messages.notice) { %>
-    <div class="flash-message">
-        <%= messages.notice %>
-    </div>
+<% if (title) { %>
+    <h1>
+        <%= title %>
+    </h1>
+<% } else { %>
+    <%- res.redirect('/') %>
 <% } %>
-    <% if (errors) { %>
-        <div class="error-message">
-            <%= errors %>
-        </div>
-     <% } %>
-<h1>You're logged in</h1>
+
+<h1>You're Logged In</h1>
+
+<% if (errors) { %>
+    <ul class="notice">
+        <% errors.array().forEach(error => { %>
+            <li>
+                <%= error.msg %>
+            </li>
+        <% }) %>
+    </ul>
+<% } %>

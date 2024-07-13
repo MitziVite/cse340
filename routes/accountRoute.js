@@ -8,7 +8,11 @@ const regValidate = require('../utilities/account-validation');
 // Routes for login and registration page views
 router.get('/login', utilities.handleErrors(accountController.buildLogin));
 router.get('/register', utilities.handleErrors(accountController.buildRegister));
-router.get('/', utilities.checkLogin, utilities.handleErrors(accountController.buildAccountManagement));
+router.get('/',
+    utilities.checkLogin,
+    utilities.handleErrors(accountController.buildAccountManagement)
+);
+
 
 
 // Process registration data
@@ -27,4 +31,19 @@ router.post(
     utilities.handleErrors(accountController.accountLogin)
 );
 
+// Log out Route
+router.get('/logout', (req, res) => {
+    req.session.destroy(err => {
+        if (err) {
+            return res.redirect('/account');
+        }
+        res.clearCookie('connect.sid');
+        res.clearCookie('jwt');
+        res.redirect('/');
+    });
+});
+
 module.exports = router;
+
+
+

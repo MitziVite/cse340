@@ -21,7 +21,7 @@ const session = require("express-session");
 const bodyParser = require("body-parser");
 const pool = require('./database/');
 const cookieParser = require("cookie-parser");
-
+const jwt = require("jsonwebtoken");
 
 
 /* ***********************
@@ -37,6 +37,13 @@ app.use(session({
     saveUninitialized: true,
     name: 'sessionId',
 }));
+
+
+app.use((req, res, next) => {
+    res.locals.user = req.session.user || null;
+    next();
+});
+
 
 // Express Messages Middleware
 app.use(flash());
