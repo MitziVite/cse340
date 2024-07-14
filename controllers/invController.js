@@ -190,7 +190,8 @@ invCont.getInventoryJSON = async (req, res, next) => {
  *  Build edit inventory view
  * ************************** */
 invCont.buildEditInventoryView = async function (req, res, next) {
-  const inv_id = parseInt(req.params.inv_id)
+  console.log({ params: req.params})
+  const inv_id = parseInt(req.params.id)
   let nav = await utilities.getNav()
   const data = await invModel.getVehicleByDataId(inv_id)
   const itemData = data[0];
@@ -319,6 +320,25 @@ invCont.deleteInventory = async function (req, res, next) {
   } else {
     req.flash("alert error", "Sorry, the vehicle was not deleted.")
     res.redirect("/inv/delete/" + inv_id)
+  }
+};
+
+
+// Add inventory
+invCont.addInventory = async function (req, res, next) {
+  try {
+    const { classification_id, inv_make, inv_model, inv_year, inv_description, inv_image, inv_thumbnail, inv_price, inv_miles, inv_color } = req.body;
+    const result = await inventoryModel.addInventory(classification_id, inv_make, inv_model, inv_year, inv_description, inv_image, inv_thumbnail, inv_price, inv_miles, inv_color);
+
+    if (result) {
+      req.flash('notice', `Successfully added the ${inv_make} ${inv_model}.`);
+      res.redirect('/inv');
+    } else {
+      req.flash('notice', 'Failed to add inventory.');
+      res.redirect('/inv/add');
+    }
+  } catch (error) {
+    next(error);
   }
 };
 

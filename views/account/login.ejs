@@ -5,6 +5,10 @@
         res.redirect('/')
 } %>
 
+<% if (messages.notice) { %>
+  <p class="notice"><%= messages.notice %></p>
+<% } %>
+
 <form id="loginForm" action="/account/login" method="POST">
     <div class="form-group">
       <label for="email">Email Address:</label>

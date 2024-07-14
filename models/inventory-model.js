@@ -30,6 +30,7 @@ async function getInventoryByClassificationId(classification_id) {
   
 
   async function getVehicleByDataId(type_id) {
+    console.log({ type_id })
     try {
       const data = await pool.query(
         `SELECT * FROM public.inventory AS i 

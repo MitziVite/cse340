@@ -136,7 +136,7 @@ Util.checkJWTToken = (req, res, next) => {
     res.locals.loggedin = 0
     next()
   }
- }
+ };
  
 
  /* ****************************************
@@ -149,7 +149,20 @@ Util.checkJWTToken = (req, res, next) => {
     req.flash("notice", "Please log in.")
     return res.redirect("account/login")
   }
- }
+ };
+
+
+// utilities/index.js
+Util.checkAdminOrEmployee = (req, res, next) => {
+  console.log(res.locals.accountData);
+    if (res.locals.accountData && (res.locals.accountData.account_type === 'Employee' || res.locals.accountData.account_type === 'Admin')) {
+        next();
+    } else {
+        req.flash('notice', 'You must be logged in as an Employee or Admin to access this page.');
+        return res.redirect('/account/login');
+    }
+};
+
 
 module.exports = Util;
 
