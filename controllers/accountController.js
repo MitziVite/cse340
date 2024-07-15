@@ -213,23 +213,24 @@ async function updateAccount(req, res, next) {
 *  Update password
 * ***************************** */
 async function updatePassword(req, res, next) {
-  let nav = await utilities.getNav();
-  const account_id = res.locals.accountData.account_id;
-  const account_password = req.body.account_password;
-  let hashedPassword;
-  hashedPassword = await bcrypt.hashSync(account_password, 10);
-  const updateResult = await accountModel.updatePassword(hashedPassword, account_id);
-  if(updateResult){
-      req.flash(
-          'notice',
-          `The password was updated successfully.`
-      );
-      res.status(201).render('account/account', {
-          title: 'Account Management',
-          nav,
-      });
+  const { account_id, account_password } = req.body;
+  try {
+    const hashedPassword = await bcrypt.hash(account_password, 10);
+    const updateResult = await accountModel.updatePassword(hashedPassword, account_id);
+    if (updateResult) {
+      req.flash('notice', 'The password was updated successfully.');
+      // Redirige o renderiza la vista que corresponda después de la actualización
+      res.render('account/account', { title: 'Account Management', nav: await utilities.getNav() });
+    } else {
+      req.flash('notice', 'Sorry, the password update failed.');
+      res.render('/account/update', { title: 'Update Account', nav: await utilities.getNav(), errors: null });
+    }
+  } catch (error) {
+    console.error('Error updating password:', error);
+    next(error);
   }
 }
+
 
 
 

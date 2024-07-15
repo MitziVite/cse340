@@ -15,7 +15,7 @@ router.get('/update', utilities.checkLogin, accountController.buildUpdate);
 router.post('/update', utilities.checkLogin, accountController.updateAccount);
 
 // Ruta para procesar la actualización de la contraseña
-router.post('/update-password', utilities.checkLogin, accountController.updatePassword); 
+router.post('/update-password', utilities.checkLogin, accountController.updateAccount); 
 
 
 
