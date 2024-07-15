@@ -5,6 +5,20 @@ const accountController = require("../controllers/accountController");
 const regValidate = require('../utilities/account-validation');
 
 
+// Ruta para mostrar la vista de la cuenta
+router.get('/account', utilities.checkLogin, accountController.buildAccount);
+
+// Ruta para mostrar la vista de actualización de la cuenta
+router.get('/update', utilities.checkLogin, accountController.buildUpdate);
+
+// Ruta para procesar la actualización de la cuenta
+router.post('/update', utilities.checkLogin, accountController.updateAccount);
+
+// Ruta para procesar la actualización de la contraseña
+router.post('/update-password', utilities.checkLogin, accountController.updatePassword); 
+
+
+
 // Routes for login and registration page views
 router.get('/login', utilities.handleErrors(accountController.buildLogin));
 router.get('/register', utilities.handleErrors(accountController.buildRegister));
@@ -14,6 +28,10 @@ router.get('/',
 );
 
 
+// Route to deliver the account update view
+router.get('/updateAccount', utilities.checkLogin, utilities.handleErrors(accountController.updateAccount));
+
+router.get('/update/:account_id', utilities.checkLogin, accountController.buildUpdate);
 
 // Process registration data
 router.post(

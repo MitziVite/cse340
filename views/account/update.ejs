@@ -1,0 +1,58 @@
+ <!-- Account Update Form -->
+ <form id="update-form" action="/account/updateAccount" method="post">
+    <div class="container">
+      <input type="hidden" name="account_id" value="<%= locals.accountData.account_id %>">
+
+      <label for="account_firstname">First Name</label>
+      <input
+        type="text"
+        name="account_firstname"
+        id="account_firstname"
+        required
+        value="<%= locals.accountData.account_firstname %>"
+      />
+
+      <label for="account_lastname">Last Name</label>
+      <input
+        type="text"
+        name="account_lastname"
+        id="account_lastname"
+        required
+        value="<%= locals.accountData.account_lastname %>"
+      />
+
+      <label for="account_email">Email</label>
+      <input
+        type="email"
+        name="account_email"
+        id="account_email"
+        required
+        value="<%= locals.accountData.account_email %>"
+      />
+
+      <button type="submit">Update Account</button>
+    </div>
+  </form>
+
+  <!-- Change Password Form -->
+  <form id="password-form" action="/account/updatePassword" method="post">
+    <div class="container">
+      <input type="hidden" name="account_id" value="<%= locals.accountData.account_id %>">
+
+      <h3>Change your password</h3>
+
+      <label for="account_password">New Password</label>
+      <input
+        type="password"
+        name="account_password"
+        id="account_password"
+        required
+        pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{12,}$"
+      />
+      <p class="password-rules">
+        Passwords must be at least 12 characters and contain at least 1 number, 1 capital letter, and 1 special character.
+      </p>
+
+      <button type="submit">Change Password</button>
+    </div>
+  </form>
