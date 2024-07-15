@@ -30,9 +30,9 @@ router.get('/',
 
 // Route to deliver the account update view
 router.get('/updateAccount', utilities.checkLogin, utilities.handleErrors(accountController.updateAccount));
-
+router.post('/updateAccount', utilities.checkLogin, accountController.updateAccount);
 router.get('/update/:account_id', utilities.checkLogin, accountController.buildUpdate);
-
+router.post('/updatePassword', utilities.checkLogin, accountController.updatePassword);
 // Process registration data
 router.post(
     "/register",
