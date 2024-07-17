@@ -13,8 +13,9 @@ baseController.buildHome = async function(req, res){
 }
 
 
-baseController.showRegister = function(req, res) {
-  res.render("register/register", { title: "Register", messages: req.flash() });
+baseController.showRegister = async function(req, res) {
+  const nav = await utilities.getNav()
+  res.render("register/register", { title: "Register", messages: req.flash(), nav });
 };
 
 module.exports = baseController

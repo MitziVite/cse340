@@ -6,6 +6,11 @@
     <%- res.redirect('/') %>
 <% } %>
 
+
+<% if (messages.notice) { %>
+    <p class="notice"><%= messages.notice %></p>
+  <% } %>
+  
 <h1>You're Logged In</h1>
 
 <% if (errors) { %>

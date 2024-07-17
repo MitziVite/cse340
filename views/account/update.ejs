@@ -1,22 +1,9 @@
-<% if (title) { %>
-    <h1>
-        <%= title %>
-    </h1>
-<% } else { %>
-    <%- res.redirect('/') %>
-<% } %>
-
+<% if (messages.notice) { %>
+    <p class="notice"><%= messages.notice %></p>
+  <% } %>
+ 
 <h1>You're Logged In</h1>
 
-<% if (errors) { %>
-    <ul class="notice">
-        <% errors.array().forEach(error => { %>
-            <li>
-                <%= error.msg %>
-            </li>
-        <% }) %>
-    </ul>
-<% } %>
  
  <!-- Account Update Form -->
  <form id="update-form" action="/account/updateAccount" method="post">
