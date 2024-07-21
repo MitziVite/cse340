@@ -1,0 +1,27 @@
+<main>
+    <h1>Account Admin</h1>
+
+    <h2>Your Reviews</h2>
+    
+
+    <% if (reviews && reviews.length > 0) { %>
+        <% reviews.forEach(review => { %>
+            <div class="review">
+                <p><%= review.account_firstname[0] %>,<%= review.account_lastname %></p>
+                <p>wrote on <%= review.review_date %></p>
+                <p><%= review.review_text %></p>
+                <form action="/review/update" method="post">
+                    <textarea name="reviewText"><%= review.review_text %></textarea>
+                    <input type="hidden" name="reviewId" value="<%= review.review_id %>">
+                    <button type="submit">Update Review</button>
+                </form>
+                <form action="/review/delete" method="post">
+                    <input type="hidden" name="reviewId" value="<%= review.review_id %>">
+                    <button type="submit">Delete Review</button>
+                </form>
+            </div>
+        <% }) %>
+    <% } else { %>
+        <p>You have not written any reviews yet.</p>
+    <% } %>
+</main>

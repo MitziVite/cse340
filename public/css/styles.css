@@ -24,6 +24,7 @@ body{
   border: 4px solid #4C96D7; 
 }
 
+
 #overlayContainer, header, nav, main, footer, #homeContainer {
   margin-left: auto;
   margin-right: auto;
@@ -105,12 +106,6 @@ nav ul li {
   color: white;
   font-family: 'Noto Sans';
 }
-
-
-
-
-
-
 
 
 

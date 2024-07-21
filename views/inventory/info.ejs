@@ -1,4 +1,4 @@
-<!-- Content Heading -->
+
 <% if (title) { %>
     <h1><%= title %></h1>
     <% } else {
@@ -12,3 +12,40 @@
 <!-- Inventory Items -->
 
 <%- grid %>
+
+<!-- Account Admin Reviews -->
+<% if(accountData && (accountData.account_type==="Admin" || accountData.account_type==="Employee" )) { %>
+
+<main>
+
+  
+  <% if (reviews && invDetails) {  %>
+    <%- include('./account-admin', { reviews: reviews, invDetails: invDetails }) %> 
+  <% } else {%>
+    <p>This car does not have a review yet</p>
+  <% } %>
+  
+</main>
+<%}else{%>
+<!-- Inventory Detail Reviews -->
+<main>
+  <h2>Inventory Detail Reviews</h2>
+  <% if (reviews && invDetails) { %>
+  <%- include('./detail', { invDetails: invDetails, reviews: reviews }) %>
+  <% } else { %>
+    <p>This car does not have a review yet</p>
+    <a href="">Click here to leave a review</a>
+  <% } %>
+  <% if(loggedin == 1){ %>
+    <div class="review">
+      <form action="/review/add" method="post">
+          <textarea name="reviewText"></textarea>
+          <button type="submit">Add Review</button>
+      </form>
+  </div>
+  <%} else{%>
+    <a href="/account/login">Click here to leave a review</a>
+    <% } %>
+</main>
+<%}%>
+

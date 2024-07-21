@@ -22,6 +22,8 @@ const bodyParser = require("body-parser");
 const pool = require('./database/');
 const cookieParser = require("cookie-parser");
 const jwt = require("jsonwebtoken");
+const reviewRoute = require('./routes/reviewRoute');
+const reviewController = require('./controllers/reviewController');
 
 
 /* ***********************
@@ -43,6 +45,8 @@ app.use((req, res, next) => {
     res.locals.user = req.session.user || null;
     next();
 });
+
+
 
 
 // Express Messages Middleware
@@ -81,12 +85,19 @@ app.get('/', utilities.handleErrors(baseController.buildHome));
 // Inventory Routes
 app.use('/inv', inventoryRoute);
 
+// Rutas
+// app.get('/inv/detail/:typeId', reviewController.getInventoryWithReviews);
+
+app.use('/review', reviewRoute);
+
 // Error Simulation Route
 app.get('/error/500', (req, res, next) => {
     const error = new Error('Intentional Server Error');
     error.status = 500;
     next(error);
 });
+
+
 
 /* ***********************
 * Express Error Handler

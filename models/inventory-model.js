@@ -8,8 +8,6 @@ async function getClassifications(){
 }
 
 
-
-
 /* ***************************
  *  Get all inventory items and classification_name by classification_id
  * ************************** */
@@ -29,14 +27,14 @@ async function getInventoryByClassificationId(classification_id) {
   }
   
 
-  async function getVehicleByDataId(type_id) {
-    console.log({ type_id })
-    try {
-      const data = await pool.query(
-        `SELECT * FROM public.inventory AS i 
-        WHERE i.inv_id = $1`,
-        [type_id]
-      )
+async function getVehicleByDataId(type_id) {
+  console.log({ type_id })
+  try {
+    const data = await pool.query(
+      `SELECT * FROM public.inventory AS i 
+      WHERE i.inv_id = $1`,
+      [type_id]
+    )
       return data.rows
     } catch (error) {
       console.error("getclassificationsbyid error " + error)
@@ -126,5 +124,16 @@ async function deleteInventoryItem(inv_id) {
 }
 
 
+async function getInventoriesByType(typeId) {
+  try {
+      const sql = `SELECT * FROM inventory WHERE inv_id = $1`;
+      const result = await pool.query(sql, [typeId]);
+      return result.rows;
+  } catch (error) {
+      console.error('Error in query', error);
+      throw error;
+  }
+}
 
-  module.exports = {getClassifications, getInventoryByClassificationId, getVehicleByDataId, addClassification, addInventory,updateInventory, deleteInventoryItem};
+  module.exports = {getClassifications, getInventoryByClassificationId, getVehicleByDataId,
+     addClassification, addInventory,updateInventory, deleteInventoryItem, getInventoriesByType};

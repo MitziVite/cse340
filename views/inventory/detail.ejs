@@ -1,0 +1,29 @@
+<main>
+    <h1><%= invDetails.inv_make %> <%= invDetails.inv_model %></h1>
+    <!-- <p><#%= invDetails.inv_description %></p> -->
+
+    <h2>Reviews</h2>
+    <% if (reviews) { %> 
+    <% if (reviews.length > 0) { %>
+        <% reviews.forEach(review => { %>
+            <div class="review">
+                <p><%= review.review_text %></p>
+                <p><%= review.review_date %> - <%= review.account_id %></p>
+            </div>
+        <% }) %>
+    <% } else { %>
+        <p>No reviews yet. Be the first to review this vehicle.</p>
+    <% } %>
+    <% }%>
+    <% if (locals.user) { %>
+        <form action="/review/add" method="post">
+            <textarea name="reviewText" required></textarea>
+            <input type="hidden" name="invId" value="<%= invDetails.invId %>">
+            <input type="hidden" name="accountId" value="<%= locals.user.accountId %>">
+            <button type="submit">Add Review</button>
+
+        </form>
+    <% } else { %>
+        <!-- <p><a href="/account/login">Log in to add a review</a></p> -->
+    <% } %>
+</main>
