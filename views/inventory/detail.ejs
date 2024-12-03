@@ -1,6 +1,5 @@
 <main>
     <h1><%= invDetails.inv_make %> <%= invDetails.inv_model %></h1>
-    <!-- <p><#%= invDetails.inv_description %></p> -->
 
     <h2>Reviews</h2>
     <% if (reviews) { %> 
@@ -16,14 +15,13 @@
     <% } %>
     <% }%>
     <% if (locals.user) { %>
-        <form action="/review/add" method="post">
+        <form action="/review/add/<%= grid.id%>" method="post" >
             <textarea name="reviewText" required></textarea>
-            <input type="hidden" name="invId" value="<%= invDetails.invId %>">
+            <input type="hidden" name="invId" value="<%= invDetails.inv_id %>">
             <input type="hidden" name="accountId" value="<%= locals.user.accountId %>">
             <button type="submit">Add Review</button>
-
         </form>
     <% } else { %>
-        <!-- <p><a href="/account/login">Log in to add a review</a></p> -->
+        <p><a href="/account/login">Log in to add a review</a></p>
     <% } %>
 </main>

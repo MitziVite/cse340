@@ -86,7 +86,7 @@ app.get('/', utilities.handleErrors(baseController.buildHome));
 app.use('/inv', inventoryRoute);
 
 // Rutas
-// app.get('/inv/detail/:typeId', reviewController.getInventoryWithReviews);
+// app.get('/inv/detail/:type_id', reviewController.getInventoryWithReviews);
 
 app.use('/review', reviewRoute);
 

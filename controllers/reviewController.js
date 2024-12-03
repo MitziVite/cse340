@@ -66,8 +66,8 @@ async function buildAddReview(req, res, next) {
 // Build update review view
 async function buildUpdateReview(req, res, next) {
     try {
-        const reviewId = req.params.reviewId;
-        const review = await reviewModel.getReviewByReviewId(reviewId);
+        const review_id = req.params.reviewId;
+        const review = await reviewModel.getReviewByReviewId(review_id);
 
         if (!review) {
             req.flash('error', 'Review not found.');
@@ -90,8 +90,8 @@ async function buildUpdateReview(req, res, next) {
 // Build delete review view
 async function buildDeleteReview(req, res, next) {
     try {
-        const reviewId = req.params.reviewId;
-        const review = await reviewModel.getReviewByReviewId(reviewId);
+        const review_id = req.params.reviewId;
+        const review = await reviewModel.getReviewByReviewId(review_id);
 
         if (!review) {
             req.flash('error', 'Review not found.');
@@ -133,8 +133,8 @@ async function addReview(req, res) {
 
 // Función para actualizar una revisión
 async function updateReview(req, res) {
-    const { reviewId, reviewText } = req.body;
-    const review = await reviewModel.updateReview(reviewId, reviewText);
+    const { review_id, review_text } = req.body;
+    const review = await reviewModel.updateReview(review_id, review_text);
     if (review) {
         req.flash('notice', 'Review updated successfully.');
     } else {
@@ -145,8 +145,8 @@ async function updateReview(req, res) {
 
 // Función para eliminar una revisión
 async function deleteReview(req, res) {
-    const { reviewId } = req.body;
-    const review = await reviewModel.deleteReview(reviewId);
+    const { review_id } = req.body;
+    const review = await reviewModel.deleteReview(review_id);
     if (review) {
         req.flash('notice', 'Review deleted successfully.');
     } else {

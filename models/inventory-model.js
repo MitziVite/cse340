@@ -24,7 +24,7 @@ async function getInventoryByClassificationId(classification_id) {
     } catch (error) {
       console.error("getclassificationsbyid error " + error)
     }
-  }
+}
   
 
 async function getVehicleByDataId(type_id) {

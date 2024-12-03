@@ -23,6 +23,7 @@ invCont.buildByClassificationId = async function (req, res, next) {
   }
 };
 
+
 invCont.buildbyTypeId = async function (req, res, next) {
   try {
     const type_id = req.params.typeId;
